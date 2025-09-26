@@ -17,7 +17,7 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 5050;
 
 const app = express();
-const origineClient = "http://localhost:5050";
+const origineClient = "https://mern-myy8.onrender.com";
 
 app.use(cookieParser());
 app.use(helmet());
