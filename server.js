@@ -20,7 +20,17 @@ const app = express();
 const origineClient = "https://mern-myy8.onrender.com";
 
 app.use(cookieParser());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https:", "http:"], // 👉 autorise images externes
+      },
+    },
+  })
+);
+
 
 // ⚠️ express-rate-limit doit être configuré comme middleware
 const limiter = rate_limiter({
@@ -37,13 +47,14 @@ app.use(express.json());
 app.use("/record", records);
 
 // 👉 Sert le frontend buildé (React, par ex.)
-app.use(express.static(path.join(__dirname, "../mern/client/dist")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../mern/client/dist", "index.html"));
+app.use(express.static(path.join(__dirname, "./mern/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./mern/client/dist", "index.html"));
 });
-app.get("/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "../mern/client/dist", "index.html"));
-});
+
+
+
 
 // start the Express server
 app.listen(PORT, () => {
