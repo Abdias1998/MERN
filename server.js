@@ -20,7 +20,7 @@ const app = express();
 const origineClient = "http://localhost:5050";
 
 app.use(cookieParser());
-// app.use(helmet());
+app.use(helmet());
 
 // ⚠️ express-rate-limit doit être configuré comme middleware
 const limiter = rate_limiter({
@@ -37,12 +37,12 @@ app.use(express.json());
 app.use("/record", records);
 
 // 👉 Sert le frontend buildé (React, par ex.)
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "./client/dist")));
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
 });
 app.get("/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
 });
 
 // start the Express server
