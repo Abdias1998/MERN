@@ -47,19 +47,19 @@ app.use(express.json());
 app.use("/record", records);
 
 // 👉 Sert le frontend buildé (React, par ex.)
-app.use(express.static(path.join(__dirname, "./mern/client/dist")));
-app.use(express.static(path.join(__dirname, "./mern/client/dist/assets")));
+app.use(express.static(path.join(__dirname, "mern/client/dist")));
+app.use(express.static(path.join(__dirname, "mern/client/dist/assets")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./mern/client/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "mern/client/dist", "index.html"));
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./mern/client/dist/assets", "index-2OTWrrGW.js"));
+  res.sendFile(path.join(__dirname, "mern/client/dist/assets", "index-2OTWrrGW.js"));
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./mern/client/dist/assets", "index-FkVhw0XO.css"));
+  res.sendFile(path.join(__dirname, "mern/client/dist/assets", "index-FkVhw0XO.css"));
 });
 
 
